@@ -16,7 +16,6 @@ app.get('/', (req, res) => res.send(
         ${content}
       </body>    
     </html>
-    
     `
 ));
 
