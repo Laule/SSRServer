@@ -2,17 +2,18 @@
 import *  as actionTypes from './contants';
 import axios from 'axios'
 
-const changeHomeList = (value) => ({
+const changeHomeList = (list) => ({
     type: actionTypes.GET_HOME_LIST,
-    value
+    list
 });
 
 
 export const getHomeList = () =>{
     return (dispatch) => {
-        axios.get('/api/tsconfig.json').then((res) => {
+        axios.get('/api/homeList.json').then((res) => {
+            const result = res.data.data;
             console.log(res);
-            // dispatch(changeHomeList(result));
+            dispatch(changeHomeList(result));
         })
     }
 };
