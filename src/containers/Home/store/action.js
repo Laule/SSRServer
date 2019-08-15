@@ -1,4 +1,3 @@
-
 import *  as actionTypes from './contants';
 import axios from 'axios'
 
@@ -8,12 +7,19 @@ const changeHomeList = (list) => ({
 });
 
 
-export const getHomeList = () =>{
+export const getHomeList = (server) => {
+    let url = '';
+    if (server) {
+        url = 'http://localhost:3000/api/homeList.json'
+    } else {
+        url = '/api/homeList.json'
+    }
     return (dispatch) => {
-        axios.get('/api/homeList.json').then((res) => {
+        return axios.get('http://localhost:3000/api/homeList.json').then((res) => {
             const result = res.data.data;
-            console.log(res);
             dispatch(changeHomeList(result));
-        })
+        }).catch(() => {
+            console.log('http请求错误');
+        });
     }
 };

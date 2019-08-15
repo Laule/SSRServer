@@ -1,5 +1,4 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
 import Home from './containers/Home';
 import Login from './containers/Login';
 
@@ -9,7 +8,7 @@ export default [
         key:'home',
         component:Home,
         exact:true,
-        loadData:()=>Home.loadData
+        loadData:Home.loadData
     },{
         path:'/login',
         key:'login',

@@ -13,14 +13,14 @@ class Home extends Component {
     }
 
     render() {
-        const {name, list} = this.props;
+        const {name} = this.props;
         return (
             <div>
                 <Header/>
                 <div>Jia Zhi Yu && {name}</div>
                 {this.getList()}
                 <button onClick={() => {
-                    alert('hello')
+                    alert('hello');
                 }}>
                     click me !
                 </button>
@@ -30,14 +30,18 @@ class Home extends Component {
 
     //在服务端不执行
     componentDidMount() {
-        this.props.getHomeList();
+        console.log(this.props.list);
+        if(!this.props.list.length)
+        {
+            this.props.getHomeList(false);
+        }
     }
 }
+
 // 这个函数 负责在服务器端渲染之前，把这个路由需要的数据提前加载好
-Home.loadData = () => {
-
+Home.loadData = (store) => {
+    return store.dispatch(getHomeList(true));
 };
-
 
 const mapStateToProps = state => ({
     list: state.home.newList,
