@@ -4,6 +4,7 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import Details from './containers/Details';
 import Translate from './containers/Translate';
+import NotFound from './containers/NotFound';
 
 export default [
     {
@@ -33,6 +34,9 @@ export default [
             key: 'translate',
             component: Translate,
             loadData: Translate.loadData
+        },
+        {
+            component:NotFound
         }
     ]
 }];

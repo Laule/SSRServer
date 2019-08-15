@@ -4,12 +4,12 @@ import React from "react";
 import {renderRoutes} from 'react-router-config';
 import {Provider} from 'react-redux';
 
-export const render = (store,routes,req) => {
+export const render = (store,routes,req,context) => {
     const content = renderToString((
         // 使用StaticRouter需要写context属性，它的值是一个对象（用来传递数据）
         // req.path获取到用户请求的路径
         <Provider store={store}>
-            <StaticRouter location={req.path} context={{}}>
+            <StaticRouter location={req.path} context={context}>
                 <div>
                     {renderRoutes(routes)}
                 </div>
