@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from '../../components/Header';
 import {connect} from 'react-redux';
 import {getHomeList} from "./store/action";
 
@@ -16,7 +15,6 @@ class Home extends Component {
         const {name} = this.props;
         return (
             <div>
-                <Header/>
                 <div>Jia Zhi Yu && {name}</div>
                 {this.getList()}
                 <button onClick={() => {
@@ -30,17 +28,16 @@ class Home extends Component {
 
     //在服务端不执行
     componentDidMount() {
-        console.log(this.props.list);
         if(!this.props.list.length)
         {
-            this.props.getHomeList(false);
+            this.props.getHomeList();
         }
     }
 }
 
 // 这个函数 负责在服务器端渲染之前，把这个路由需要的数据提前加载好
 Home.loadData = (store) => {
-    return store.dispatch(getHomeList(true));
+    return store.dispatch(getHomeList());
 };
 
 const mapStateToProps = state => ({

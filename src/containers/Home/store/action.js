@@ -1,7 +1,4 @@
 import *  as actionTypes from './contants';
-import axios from 'axios'
-import clientAxios from '../../../client/request';
-import serverAxios from '../../../server/request';
 
 const changeHomeList = (list) => ({
     type: actionTypes.GET_HOME_LIST,
@@ -9,10 +6,9 @@ const changeHomeList = (list) => ({
 });
 
 
-export const getHomeList = (server) => {
-    const request = server ? serverAxios : clientAxios;
-    return (dispatch) => {
-        return request.get('api/homeList.json').then((res) => {
+export const getHomeList = () => {
+    return (dispatch,getState,axiosInstance) => {
+        return axiosInstance.get('/api/homeList.json').then((res) => {
             const result = res.data.data;
             dispatch(changeHomeList(result));
         }).catch(()=>{

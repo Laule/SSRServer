@@ -1,0 +1,1 @@
+export const CHANGE_TRANSLATE_LIST = 'translate/change_translate_list'

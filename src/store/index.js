@@ -1,16 +1,24 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-import { reducer as homeReducer } from '../containers/Home/store';
+import {reducer as homeReducer} from '../containers/Home/store';
+import {reducer as headerReducer} from '../components/Header/store';
+import {reducer as translateReducer} from '../containers/Translate/store';
+import clientAxios from '../client/request';
+import serverAxios from '../server/request';
+
 
 const reducer = combineReducers({
-    home: homeReducer
+    home: homeReducer,
+    header: headerReducer,
+    translate: translateReducer
 });
 
-export const getStore = () => {
-    return createStore(reducer, applyMiddleware(thunk));
+export const getStore = (req) => {
+    // 改变服务器端的store的内容 就使用serverAxios
+    return createStore(reducer, applyMiddleware(thunk.withExtraArgument(serverAxios(req))));
 };
 
 export const getClientStore = () => {
     const defaultState = window.context.state;
-    return createStore(reducer,defaultState, applyMiddleware(thunk));
+    return createStore(reducer, defaultState, applyMiddleware(thunk.withExtraArgument(clientAxios)));
 };

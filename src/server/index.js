@@ -18,7 +18,7 @@ app.use('/api', proxy('http://localhost:3000', {
 }));
 
 app.get('*', function (req, res) {
-    const store = getStore();
+    const store = getStore(req);
     // 拿到异步数据，并填充到store之中
     // 根据路由地址，往store填充数据
     const matchedRoutes = matchRoutes(routes,req.path);
@@ -30,7 +30,7 @@ app.get('*', function (req, res) {
             promises.push(item.route.loadData(store));
         }
     });
-    // console.log(promises);
+    console.log(promises);
     //等待所有的promise执行完，再执行下面的代码
     Promise.all(promises).then(() => {
     res.send(render(store, routes, req));
