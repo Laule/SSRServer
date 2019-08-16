@@ -34,8 +34,11 @@ app.get('*', function (req, res) {
     Promise.all(promises).then(() => {
         const context = {};
         const html = render(store, routes, req, context);
-        console.log(html);
-        if (context.NotFound) {
+        if(context.action === 'REPLACE')
+        {
+            res.redirect(301,context.url)
+        }
+        else if (context.NotFound) {
             res.status(404);
             res.send(html);
         } else {
