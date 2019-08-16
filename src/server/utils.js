@@ -16,9 +16,9 @@ export const render = (store, routes, req, context) => {
             </StaticRouter>
         </Provider>
     ));
-
-    const cssStr = context.css ? context.css : '';
-    console.log(cssStr);
+    // console.log(context.css);
+    const cssStr = context.css.length ? context.css.join('\n') : '';
+    // console.log(cssStr);
     return `
     <html> 
       <head>

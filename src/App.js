@@ -6,7 +6,7 @@ import {actions} from './components/Header/store/';
 const App = (props) => {
     return (
         <div>
-            <Header/>
+            <Header staticContext = {props.staticContext}/>
             {renderRoutes(props.route.routes)}
         </div>
     );
@@ -15,4 +15,5 @@ const App = (props) => {
 App.loadData = (store) => {
     return store.dispatch(actions.getHeaderInfo());
 };
+
 export default App;

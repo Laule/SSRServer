@@ -35,7 +35,7 @@ app.get('*', function (req, res) {
     // console.log(promises);
     //等待所有的promise执行完，再执行下面的代码
     Promise.all(promises).then(() => {
-        const context = {};
+        const context = {css:[]};
         const html = render(store, routes, req, context);
 
         if (context.action === 'REPLACE') {

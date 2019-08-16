@@ -2,11 +2,13 @@ import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from './store/actions';
+import style from './style.css';
+import withStyle from '../../withStyle';
 class Header extends Component {
     render() {
         const {isLogin,handleLogin,handleLogout} = this.props;
         return (
-            <div>
+            <div className={style.test}>
                 <Link to='/'>首页</Link>
                 <br/>
                 {
@@ -34,4 +36,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyle(Header,style));
