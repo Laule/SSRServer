@@ -12,7 +12,8 @@ export const getHomeList = () => {
             const result = res.data.data;
             dispatch(changeHomeList(result));
         }).catch(()=>{
-            console.log('http请求错误');
+            res.end('request error');
+            // console.log('http请求错误');
         });
         // return axios.get('http://localhost:3000/api/homeList.json').then((res) => {
         //     const result = res.data.data;

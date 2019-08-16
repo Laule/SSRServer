@@ -4,7 +4,7 @@ import React from "react";
 import {renderRoutes} from 'react-router-config';
 import {Provider} from 'react-redux';
 
-export const render = (store,routes,req,context) => {
+export const render = (store, routes, req, context) => {
     const content = renderToString((
         // 使用StaticRouter需要写context属性，它的值是一个对象（用来传递数据）
         // req.path获取到用户请求的路径
@@ -16,10 +16,14 @@ export const render = (store,routes,req,context) => {
             </StaticRouter>
         </Provider>
     ));
-    return`
+
+    const cssStr = context.css ? context.css : '';
+    console.log(cssStr);
+    return `
     <html> 
       <head>
        <title>ssr</title>
+       <style>${cssStr}</style>
       </head>
       <body>
         <div id="root">${content}</div>

@@ -26,17 +26,20 @@ app.get('*', function (req, res) {
     const promises = [];
     matchedRoutes.forEach(item => {
         if (item.route.loadData) {
-            promises.push(item.route.loadData(store));
+            const promise = new Promise((resolve, reject) => {
+                item.route.loadData(store).then(resolve).catch(resolve);
+            });
+            promises.push(promise);
         }
     });
-    console.log(promises);
+    // console.log(promises);
     //等待所有的promise执行完，再执行下面的代码
     Promise.all(promises).then(() => {
         const context = {};
         const html = render(store, routes, req, context);
-        if(context.action === 'REPLACE')
-        {
-            res.redirect(301,context.url)
+
+        if (context.action === 'REPLACE') {
+            res.redirect(301, context.url)
         }
         else if (context.NotFound) {
             res.status(404);
@@ -44,7 +47,7 @@ app.get('*', function (req, res) {
         } else {
             res.send(html);
         }
-        console.log(context);
+        // console.log(context);
         // console.log(store.getState());
     });
 });
