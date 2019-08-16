@@ -7,14 +7,12 @@ import withStyle from '../../withStyle';
 
 // 同构： 一套React代码在服务器端执行一次，在客户端执行再执行一次。
 class Home extends Component {
-
     getList() {
         const {list} = this.props;
         return list.map((item) => {
             return <div className={style["list-item"]} key={item.id}>{item.title}</div>
         })
     }
-
     render() {
         const {name} = this.props;
         return (

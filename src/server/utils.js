@@ -20,6 +20,7 @@ export const render = (store, routes, req, context) => {
     const helmet = Helmet.renderStatic();
 
     // console.log(context.css);
+    // 如果context内容有css 拼接css
     const cssStr = context.css.length ? context.css.join('\n') : '';
     // console.log(cssStr);
     return `
