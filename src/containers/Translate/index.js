@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {getTranslateList} from "./store/action";
 import {Redirect} from 'react-router-dom';
 import style from './style.css';
 import withStyle from '../../withStyle';
+import {Helmet} from 'react-helmet';
 class Translate extends Component {
     getList() {
         const {list} = this.props;
@@ -14,9 +15,15 @@ class Translate extends Component {
 
     render() {
         return this.props.isLogin ? (
-            <div>
-                {this.getList()}
-            </div>
+            <Fragment>
+                <Helmet>
+                    <title>翻译页面</title>
+                    <meta name="description" content="Helmet application" />
+                </Helmet>
+                <div>
+                    {this.getList()}
+                </div>
+            </Fragment>
         ) : <Redirect to='/'/>
     }
 
@@ -39,7 +46,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-const ExportTranslate = connect(mapStateToProps, mapDispatchToProps)(withStyle(Translate,style));
+const ExportTranslate = connect(mapStateToProps, mapDispatchToProps)(withStyle(Translate, style));
 
 ExportTranslate.loadData = (store) => {
     return store.dispatch(getTranslateList());
