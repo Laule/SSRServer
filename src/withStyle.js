@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import style from "./containers/Home/style.css";
 // 这个函数，是生成高阶组件的函数
 // 这个函数返回一个组件
 export default (DecoratedComponent, style) => {
